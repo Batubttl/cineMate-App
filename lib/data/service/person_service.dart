@@ -1,4 +1,4 @@
-import 'package:cinemate_app/core/network/dio_manager.dart';
+import 'package:cinemate_app/core/network/dio/dio_manager.dart';
 import 'package:dio/dio.dart';
 
 class PersonService {
