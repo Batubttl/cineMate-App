@@ -1,15 +1,23 @@
+import 'package:cinemate_app/core/constant/app_constant.dart';
 import 'package:cinemate_app/core/network/dio/dio_manager.dart';
 import 'package:dio/dio.dart';
 
 class PersonService {
   final Dio _dio = DioManager.instance.dio;
 
-  Future<Map<String, dynamic>> getPopularPersons() async {
+  /// Popüler kişileri getirir
+  Future<Map<String, dynamic>> getPopularPeople() async {
     try {
-      final response = await _dio.get('/person/popular');
+      final response = await _dio.get(
+        '/person/popular',
+        queryParameters: {
+          'language': 'tr-TR',
+          'page': 1,
+        },
+      );
       return response.data;
-    } catch (e) {
-      throw Exception('Error: $e');
+    } on DioException catch (e) {
+      throw Exception('${AppString.errorPopularPeople}: ${e.message}');
     }
   }
 }
