@@ -3,8 +3,8 @@ import 'package:cinemate_app/core/network/dio/dio_manager.dart';
 import 'package:dio/dio.dart';
 
 class MovieService {
-  final Dio _dio = DioManager.instance.dio;
-
+  final Dio _dio;
+  MovieService(this._dio);
   Future<Map<String, dynamic>> getPopularMovies() async {
     try {
       final response = await _dio.get('/movie/popular', queryParameters: {

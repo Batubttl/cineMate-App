@@ -3,7 +3,8 @@ import 'package:cinemate_app/core/network/dio/dio_manager.dart';
 import 'package:dio/dio.dart';
 
 class PersonService {
-  final Dio _dio = DioManager.instance.dio;
+  final Dio _dio;
+  PersonService(this._dio);
 
   /// Popüler kişileri getirir
   Future<Map<String, dynamic>> getPopularPeople() async {

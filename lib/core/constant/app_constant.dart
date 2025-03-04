@@ -23,4 +23,7 @@ class AppString {
   static const String errorMoviesByGenres =
       'Türlerine göre filmler getirilirken bir hata oluştu';
   static const String errorSearch = 'Arama yapılırken bir hata oluştu';
+  static const String homePage = 'Ana Sayfa';
+  static const String searchPage = 'Arama';
+  static const String myListPage = 'Listem';
 }

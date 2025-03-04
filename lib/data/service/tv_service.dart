@@ -1,9 +1,10 @@
 import 'package:cinemate_app/core/constant/app_constant.dart';
 import 'package:cinemate_app/core/network/dio/dio_manager.dart';
+import 'package:dio/dio.dart';
 
 class TVService {
-  final dio = DioManager.instance.dio;
-
+  final Dio dio;
+  TVService(this.dio);
   Future<Map<String, dynamic>> getPopularTvShows() async {
     try {
       final response = await dio.get('/tv/popular', queryParameters: {

@@ -1,9 +1,10 @@
 import 'package:cinemate_app/core/constant/app_constant.dart';
-import 'package:cinemate_app/core/network/dio_manager.dart';
+import 'package:cinemate_app/core/network/dio/dio_manager.dart';
 import 'package:dio/dio.dart';
 
 class SearchService {
-  final Dio _dio = DioManager.instance.dio;
+  final Dio _dio;
+  SearchService(this._dio);
 
   Future<Map<String, dynamic>> search(String query) async {
     try {
