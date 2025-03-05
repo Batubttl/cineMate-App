@@ -1,4 +1,5 @@
 import 'package:cinemate_app/core/enum/movie_list_type.dart';
+import 'package:cinemate_app/data/model/movie_model.dart';
 import 'package:cinemate_app/data/service/movie_service.dart';
 import 'package:cinemate_app/presentation/cubit/movie/movie_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,10 +95,8 @@ class MovieCubit extends Cubit<MovieState> {
           if (!state.hasMorePopularMovies) return;
           final nextPage = (state.popularMovies?.length ?? 0) ~/ 20 + 1;
           final movie = await _movieService.getPopularMovies(page: nextPage);
-          final updatedMovies = [
-            ...state.popularMovies ?? [],
-            ...movie.results
-          ];
+          final List<MovieResults> updatedMovies =
+              List.from(state.popularMovies ?? [])..addAll(movie.results);
           emit(state.copyWith(
             popularMovies: updatedMovies,
             hasMorePopularMovies: movie.page < movie.totalPages,
@@ -107,10 +106,8 @@ class MovieCubit extends Cubit<MovieState> {
           if (!state.hasMoreTrendingMovies) return;
           final nextPage = (state.trendingMovies?.length ?? 0) ~/ 20 + 1;
           final movie = await _movieService.getTrendingMovies(page: nextPage);
-          final updatedMovies = [
-            ...state.trendingMovies ?? [],
-            ...movie.results
-          ];
+          final List<MovieResults> updatedMovies =
+              List.from(state.popularMovies ?? [])..addAll(movie.results);
           emit(state.copyWith(
             trendingMovies: updatedMovies,
             hasMoreTrendingMovies: movie.page < movie.totalPages,
@@ -120,10 +117,8 @@ class MovieCubit extends Cubit<MovieState> {
           if (!state.hasMoreTopRatedMovies) return;
           final nextPage = (state.topRatedMovies?.length ?? 0) ~/ 20 + 1;
           final movie = await _movieService.getTopRatedMovies(page: nextPage);
-          final updatedMovies = [
-            ...state.topRatedMovies ?? [],
-            ...movie.results
-          ];
+          final List<MovieResults> updatedMovies =
+              List.from(state.popularMovies ?? [])..addAll(movie.results);
           emit(state.copyWith(
             topRatedMovies: updatedMovies,
             hasMoreTopRatedMovies: movie.page < movie.totalPages,
@@ -134,10 +129,8 @@ class MovieCubit extends Cubit<MovieState> {
           final nextPage = (state.moviesByGenre?.length ?? 0) ~/ 20 + 1;
           final movie =
               await _movieService.getMoviesByGenres(genreId, page: nextPage);
-          final updatedMovies = [
-            ...state.moviesByGenre ?? [],
-            ...movie.results
-          ];
+          final List<MovieResults> updatedMovies =
+              List.from(state.popularMovies ?? [])..addAll(movie.results);
           emit(state.copyWith(
             moviesByGenre: updatedMovies,
             hasMoreMoviesByGenre: movie.page < movie.totalPages,

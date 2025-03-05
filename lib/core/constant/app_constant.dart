@@ -26,4 +26,9 @@ class AppString {
   static const String homePage = 'Ana Sayfa';
   static const String searchPage = 'Arama';
   static const String myListPage = 'Listem';
+  static const String errorFavorites = 'Favoriler getirilirken bir hata oluştu';
+  static const String errorToggleFavorite =
+      'Favorilere eklenirken bir hata oluştu';
+  static const String errorCheckIsFavorites =
+      'Favori kontrolü yapılırken bir hata oluştu';
 }
