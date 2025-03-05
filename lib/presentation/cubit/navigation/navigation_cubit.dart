@@ -8,3 +8,4 @@ class NavigationCubit extends Cubit<NavigationState> {
     emit(NavigationState(currentIndex: index));
   }
 }
+
