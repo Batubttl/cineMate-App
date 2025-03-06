@@ -1,5 +1,6 @@
 import 'package:cinemate_app/core/constant/app_constant.dart';
 import 'package:cinemate_app/data/model/favorite_model.dart';
+import 'package:cinemate_app/data/model/genre_model.dart';
 import 'package:cinemate_app/data/model/movie_detail_model.dart';
 import 'package:cinemate_app/data/model/movie_model.dart';
 import 'package:dio/dio.dart';
@@ -14,7 +15,12 @@ class MovieService {
         'language': 'tr-TR',
         'page': page,
       });
-      return Movie.fromJson(response.data);
+      if (response.statusCode == 200) {
+        return Movie.fromJson(response.data);
+      } else {
+        throw Exception(
+            '${AppString.errorPopularMovies} :{response.statusCode}');
+      }
     } catch (e) {
       throw Exception('${AppString.errorPopularMovies}: $e');
     }
@@ -26,7 +32,12 @@ class MovieService {
         'language': 'tr-TR',
         'page': page,
       });
-      return Movie.fromJson(response.data);
+      if (response.statusCode == 200) {
+        return Movie.fromJson(response.data);
+      } else {
+        throw Exception(
+            '${AppString.errorTrendingMovies} :{response.statusCode}');
+      }
     } catch (e) {
       throw Exception('${AppString.errorTrendingMovies} : $e');
     }
@@ -38,20 +49,49 @@ class MovieService {
         'language': 'tr-TR',
         'page': page,
       });
-      return Movie.fromJson(response.data);
+      if (response.statusCode == 200) {
+        return Movie.fromJson(response.data);
+      } else {
+        throw Exception(
+            '${AppString.errorTopRatedMovies} :{response.statusCode}');
+      }
     } catch (e) {
       throw Exception('${AppString.errorTopRatedMovies} $e');
     }
   }
 
-  Future<Movie> getMoviesByGenres(int genreIds, {int page = 1}) async {
+  Future<List<GenreModel>> getGenres() async {
+    try {
+      final response = await _dio.get('/genre/movie/list', queryParameters: {
+        'language': 'tr-TR',
+      });
+      if (response.statusCode == 200) {
+        final genreResponse = GenreResponse.fromJson(response.data);
+        return genreResponse.genres;
+      } else {
+        throw Exception(
+            '${AppString.errorMoviesByGenres}: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('${AppString.errorMoviesByGenres}: $e');
+    }
+  }
+
+  Future<Movie> getMoviesByGenre(int genreId, {int page = 1}) async {
     try {
       final response = await _dio.get('/discover/movie', queryParameters: {
-        'with_genres': genreIds,
         'language': 'tr-TR',
+        'with_genres': genreId,
         'page': page,
+        'sort_by': 'popularity.desc',
       });
-      return Movie.fromJson(response.data);
+
+      if (response.statusCode == 200) {
+        return Movie.fromJson(response.data);
+      } else {
+        throw Exception(
+            '${AppString.errorMoviesByGenres}: ${response.statusCode}');
+      }
     } catch (e) {
       throw Exception('${AppString.errorMoviesByGenres}: $e');
     }
@@ -63,9 +103,14 @@ class MovieService {
         'language': 'tr-TR',
         'append_to_response': 'videos,credits,similar,recommendations',
       });
-      return MovieDetail.fromJson(response.data);
+      if (response.statusCode == 200) {
+        return MovieDetail.fromJson(response.data);
+      } else {
+        throw Exception(
+            '${AppString.errorMovieDetail}: ${response.statusCode}');
+      }
     } catch (e) {
-      throw Exception('Film detayı alınamadı: $e');
+      throw Exception('${AppString.errorMovieDetail}: $e');
     }
   }
 
@@ -77,9 +122,13 @@ class MovieService {
         'page': page,
         'include_adult': false,
       });
-      return Movie.fromJson(response.data);
+      if (response.statusCode == 200) {
+        return Movie.fromJson(response.data);
+      } else {
+        throw Exception('${AppString.errorSearch}: ${response.statusCode}');
+      }
     } catch (e) {
-      throw Exception('Film araması yapılamadı: $e');
+      throw Exception('${AppString.errorSearch}: $e');
     }
   }
 
@@ -96,12 +145,15 @@ class MovieService {
     }
   }
 
-  Future<void> toggleFavorite() async {
+  Future<void> toggleFavorite(
+      {required int mediaId,
+      required bool isFavorite,
+      required String accountId}) async {
     try {
-      final response = await _dio.post('/account/{account_id}/favorite', data: {
+      final response = await _dio.post('/account/$accountId/favorite', data: {
         'media_type': 'movie',
-        'media_id': 'mediaId',
-        'favorite': true,
+        'media_id': mediaId,
+        'favorite': isFavorite,
       });
       return response.data;
     } catch (e) {
