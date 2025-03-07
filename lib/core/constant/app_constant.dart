@@ -32,7 +32,17 @@ class AppString {
   static const String errorCheckIsFavorites =
       'Favori kontrolü yapılırken bir hata oluştu';
   static const String errorMessage = 'Veriler yüklenirken bir hata oluştu ';
-  static const errorGenres = 'Türler getirilirken bir hata oluştu';
-  static const errorMovieDetail = 'Film detayları getirilirken bir hata oluştu';
-  static const errorSaveFavorited = 'Favoriler kaydedilirken bir hata oluştu';
+  static const String errorGenres = 'Türler getirilirken bir hata oluştu';
+  static const String errorMovieDetail =
+      'Film detayları getirilirken bir hata oluştu';
+  static const String errorSaveFavorited =
+      'Favoriler kaydedilirken bir hata oluştu';
+  static const String errorRemoveFavorited =
+      'Favorilerden kaldırılırken bir hata oluştu';
+  static const String errorGetFavoriteCount =
+      'Favori sayısı getirilirken bir hata oluştu';
+  static const String errorAddFavorite =
+      'Favorilere eklenirken bir hata oluştu';
+  static const String errorClearFavorites =
+      'Favoriler temizlenirken bir hata oluştu';
 }
