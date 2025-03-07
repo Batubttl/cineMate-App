@@ -1,3 +1,4 @@
+import 'package:cinemate_app/data/model/genre_model.dart';
 import 'package:cinemate_app/data/model/movie_model.dart';
 
 class MovieDetail {
@@ -10,7 +11,7 @@ class MovieDetail {
   final int voteCount;
   final String releaseDate;
   final int runtime;
-  final List<Genre> genres;
+  final List<GenreModel> genres;
   final List<Cast> cast;
   final List<MovieResults> similarMovies;
   final List<MovieResults> recommendations;
@@ -43,7 +44,7 @@ class MovieDetail {
       releaseDate: json['release_date'] ?? '',
       runtime: json['runtime'] ?? 0,
       genres: (json['genres'] as List<dynamic>?)
-              ?.map((e) => Genre.fromJson(e))
+              ?.map((e) => GenreModel.fromJson(e))
               .toList() ??
           [],
       cast: (json['credits']?['cast'] as List<dynamic>?)
@@ -58,23 +59,6 @@ class MovieDetail {
               ?.map((e) => MovieResults.fromJson(e))
               .toList() ??
           [],
-    );
-  }
-}
-
-class Genre {
-  final int id;
-  final String name;
-
-  Genre({
-    required this.id,
-    required this.name,
-  });
-
-  factory Genre.fromJson(Map<String, dynamic> json) {
-    return Genre(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
     );
   }
 }
