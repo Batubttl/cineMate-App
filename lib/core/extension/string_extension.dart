@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cinemate_app/core/constant/api_constant.dart';
 import 'package:cinemate_app/core/enum/image_size.dart';
 
