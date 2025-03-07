@@ -11,14 +11,25 @@ class ApiConstant {
   static const String imageBaseUrl = 'https://image.tmdb.org/t/p';
   static const String originalImage = '$imageBaseUrl/original';
   static const String w500Image = '$imageBaseUrl/w500';
+  static const String _moviePath = '/movie';
+  static const String _accountPath = '/account';
+  static const String _genrePath = '/genre';
+  static const String _searchPath = '/search';
+  static const String _trendingPath = '/trending';
 
-  static String getPosterUrl(String? path) {
-    if (path == null) return '';
-    return '$w500Image$path';
-  }
+  // Movie Endpoints
+  static const String popularPath = '$_moviePath/popular';
+  static const String topRatedPath = '$_moviePath/top_rated';
+  static const String upcomingPath = '$_moviePath/upcoming';
+  static const String trendingPath = '$_trendingPath/movie/day';
 
-  static String getBackdropUrl(String? path) {
-    if (path == null) return '';
-    return '$originalImage$path';
-  }
+  // Account Endpoints
+  static const String favoriteMoviesPath =
+      '$_accountPath/{account_id}/favorite/movies';
+  static const String favoriteTvPath = '$_accountPath/{account_id}/favorite/tv';
+  static const String addFavoritePath = '$_accountPath/{account_id}/favorite';
+
+  // Genre Endpoints
+  static const String movieGenresPath = '$_genrePath/movie/list';
+  static const String tvGenresPath = '$_genrePath/tv/list';
 }
