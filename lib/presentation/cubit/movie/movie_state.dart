@@ -1,4 +1,3 @@
-import 'package:cinemate_app/data/model/favorite_model.dart';
 import 'package:cinemate_app/data/model/genre_model.dart';
 import 'package:cinemate_app/data/model/movie_detail_model.dart';
 import 'package:cinemate_app/data/model/movie_model.dart';
@@ -9,13 +8,10 @@ class MovieState extends Equatable {
   final List<MovieResults>? trendingMovies;
   final List<MovieResults>? topRatedMovies;
   final List<MovieResults>? searchResults;
-  final List<FavoriteItem>? favorites;
   final List<GenreModel>? genres;
   final Map<int, List<MovieResults>>? moviesByGenre;
-
   final MovieDetail? selectedMovie;
-  final bool isFavorite;
-  final bool isFavoriteLoading;
+
   final bool isLoading;
   final bool isSearching;
 
@@ -27,10 +23,7 @@ class MovieState extends Equatable {
   final String? errorMessage;
 
   const MovieState({
-    this.isFavoriteLoading = false,
     this.genres,
-    this.favorites,
-    this.isFavorite = false,
     this.popularMovies,
     this.trendingMovies,
     this.topRatedMovies,
@@ -47,14 +40,14 @@ class MovieState extends Equatable {
   });
 
   factory MovieState.initial() => const MovieState(
-      popularMovies: [],
-      trendingMovies: [],
-      topRatedMovies: [],
-      genres: [],
-      moviesByGenre: {},
-      searchResults: [],
-      isLoading: false,
-      favorites: []);
+        popularMovies: [],
+        trendingMovies: [],
+        topRatedMovies: [],
+        genres: [],
+        moviesByGenre: {},
+        searchResults: [],
+        isLoading: false,
+      );
 
   MovieState copyWith({
     List<MovieResults>? popularMovies,
@@ -63,12 +56,9 @@ class MovieState extends Equatable {
     Map<int, List<MovieResults>>? moviesByGenre,
     List<GenreModel>? genres,
     List<MovieResults>? searchResults,
-    List<FavoriteItem>? favorites,
     MovieDetail? selectedMovie,
-    bool? isFavoriteLoading,
     bool? isLoading,
     bool? isSearching,
-    bool? isFavorite,
     bool? hasMorePopularMovies,
     bool? hasMoreTrendingMovies,
     bool? hasMoreTopRatedMovies,
@@ -84,10 +74,7 @@ class MovieState extends Equatable {
         searchResults: searchResults ?? this.searchResults,
         selectedMovie: selectedMovie ?? this.selectedMovie,
         isLoading: isLoading ?? this.isLoading,
-        isFavoriteLoading: isFavoriteLoading ?? this.isFavoriteLoading,
         isSearching: isSearching ?? this.isSearching,
-        isFavorite: isFavorite ?? this.isFavorite,
-        favorites: favorites,
         hasMorePopularMovies: hasMorePopularMovies ?? this.hasMorePopularMovies,
         hasMoreTrendingMovies:
             hasMoreTrendingMovies ?? this.hasMoreTrendingMovies,
@@ -106,9 +93,6 @@ class MovieState extends Equatable {
         moviesByGenre,
         searchResults,
         selectedMovie,
-        favorites,
-        isFavoriteLoading,
-        isFavorite,
         isLoading,
         isSearching,
         hasMorePopularMovies,
