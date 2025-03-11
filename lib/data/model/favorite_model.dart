@@ -13,7 +13,7 @@ class FavoriteResponse {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       '': toMap(),
-      'results': results.map((x) => toMap()).toList(),
+      'results': results.map((FavoriteItem x) => toMap()).toList(),
       'totalPages': totalPages,
       'totalResults': totalResults,
     };
@@ -30,6 +30,12 @@ class FavoriteResponse {
       totalResults: json['total_results'] ?? 0,
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'page': page,
+      'results': results.map((item) => item.toJson()).toList(),
+    };
+  }
 }
 
 class FavoriteItem {
@@ -40,13 +46,14 @@ class FavoriteItem {
   final double? voteAverage;
   final String mediaType;
 
-  FavoriteItem(
-      {required this.id,
-      required this.title,
-      this.posterPath,
-      this.backdropPath,
-      this.voteAverage,
-      required this.mediaType});
+  FavoriteItem({
+    required this.id,
+    required this.title,
+    this.posterPath,
+    this.backdropPath,
+    this.voteAverage,
+    required this.mediaType,
+  });
   factory FavoriteItem.fromJson(Map<String, dynamic> json) {
     final title = json['title'] ?? json['name'] ?? '';
     final mediaType = json['media_type'] ?? 'movie';

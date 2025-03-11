@@ -23,7 +23,6 @@ class Movie {
     );
   }
 
-  // Movie nesnesinden JSON'a dönüştürme
   Map<String, dynamic> toJson() {
     return {
       'page': page,
@@ -36,14 +35,14 @@ class Movie {
 
 class MovieResults {
   final bool adult;
-  final String? backdropPath; // null olabilir
+  final String? backdropPath;
   final List<int>? genreIds;
   final int id;
   final String originalLanguage;
   final String originalTitle;
   final String overview;
   final double popularity;
-  final String? posterPath; // null olabilir
+  final String? posterPath;
   final String? releaseDate;
   final String title;
   final bool? video;
@@ -67,7 +66,6 @@ class MovieResults {
     this.voteCount,
   });
 
-  // JSON'dan MovieResults nesnesine dönüştürme
   factory MovieResults.fromJson(Map<String, dynamic> json) {
     return MovieResults(
       adult: json['adult'] ?? false,
@@ -88,7 +86,6 @@ class MovieResults {
     );
   }
 
-  // MovieResults nesnesinden JSON'a dönüştürme
   Map<String, dynamic> toJson() {
     return {
       'adult': adult,
