@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 class AppTextStyles {
-  // Başlıklar
   static const TextStyle headline1 = TextStyle(
     fontSize: 32,
     fontWeight: FontWeight.bold,
@@ -21,7 +20,6 @@ class AppTextStyles {
     color: AppColors.textPrimary,
   );
 
-  // Gövde metinleri
   static const TextStyle bodyLarge = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,
@@ -40,7 +38,6 @@ class AppTextStyles {
     color: AppColors.textSecondary,
   );
 
-  // Özel stiller
   static const TextStyle movieTitle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.bold,
