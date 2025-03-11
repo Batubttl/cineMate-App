@@ -31,4 +31,22 @@ class ApiConstant {
 
   static const String movieGenresPath = '$_genrePath/movie/list';
   static const String tvGenresPath = '$_genrePath/tv/list';
+
+  // Image Sizes
+  static const String posterSize = 'w500';
+  static const String backdropSize = 'w1280';
+  static const String profileSize = 'w185';
+
+  // Image URLs
+  static String getImageUrl(String? path, {String size = posterSize}) {
+    if (path == null) return '';
+    return '$imageBaseUrl/$size$path';
+  }
+
+  static String getPosterUrl(String? path) =>
+      getImageUrl(path, size: posterSize);
+  static String getBackdropUrl(String? path) =>
+      getImageUrl(path, size: backdropSize);
+  static String getProfileUrl(String? path) =>
+      getImageUrl(path, size: profileSize);
 }

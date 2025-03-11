@@ -3,19 +3,20 @@ class AppString {
   static const String popularMovies = 'Popüler Filmler';
   static const String trendingMovies = 'Trend Filmler';
   static const String popularTvShows = 'Popüler Diziler';
-  static const String trendingTvShows = 'Trend Diziler';
+  static const String trendingTvShows = 'Gündemdeki Diziler';
   static const String popularPeople = 'Popüler Kişiler';
   static const String trendingPeople = 'Trend Kişiler';
+  static const String topRatedMovies = 'İzleyenlerin En Sevdiği Filmler';
   static const String errorTopRatedTvShows =
-      'En iyi diziler getirilirken bir hata oluştu';
+      'En iyi diziler yüklenirken hata oluştu';
   static const String errorPopularMovies =
       'Popüler filmler getirilirken bir hata oluştu';
   static const String errorTrendingMovies =
       'Trend filmler getirilirken bir hata oluştu';
   static const String errorPopularTvShows =
-      'Popüler diziler getirilirken bir hata oluştu';
+      'Popüler diziler yüklenirken hata oluştu';
   static const String errorTrendingTvShows =
-      'Trend diziler getirilirken bir hata oluştu';
+      'Gündemdeki diziler yüklenirken hata oluştu';
   static const String errorPopularPeople =
       'Popüler kişiler getirilirken bir hata oluştu';
   static const String errorTopRatedMovies =
@@ -24,8 +25,10 @@ class AppString {
       'Türlerine göre filmler getirilirken bir hata oluştu';
   static const String errorSearch = 'Arama yapılırken bir hata oluştu';
   static const String homePage = 'Ana Sayfa';
+  static const String favoritePage = 'Favoriler';
   static const String searchPage = 'Arama';
   static const String myListPage = 'Listem';
+
   static const String errorFavorites = 'Favoriler getirilirken bir hata oluştu';
   static const String errorToggleFavorite =
       'Favorilere eklenirken bir hata oluştu';
@@ -45,4 +48,12 @@ class AppString {
       'Favorilere eklenirken bir hata oluştu';
   static const String errorClearFavorites =
       'Favoriler temizlenirken bir hata oluştu';
+  static const String error = 'Hata';
+  static const String tryAgain = 'Tekrar Deneyin';
+  static const String noData = 'Veri Yok';
+  static const String addFavorite = 'Favorilere Eklendi';
+  static const String removeFavorite = 'Favorilerden çıkarıldı';
+  static const String oK = 'Tamam';
+  static const String goFavorites = 'Favorilere Git';
+  static const String topRatedTvShows = 'İzleyenlerin En Sevdiği Diziler';
 }
