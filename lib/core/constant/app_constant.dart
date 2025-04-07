@@ -28,6 +28,11 @@ class AppString {
   static const String favoritePage = 'Favoriler';
   static const String searchPage = 'Arama';
   static const String myListPage = 'Listem';
+  static const String clearAllFavorites = 'Favorileri Temizle';
+  static const String clearAllFavoritesConfirmation =
+      'Tüm favorileri silmek istediğinize emin misiniz?';
+  static const String cancel = 'Vazgeç';
+  static const String clear = 'Temizle';
 
   static const String errorFavorites = 'Favoriler getirilirken bir hata oluştu';
   static const String errorToggleFavorite =
@@ -56,4 +61,17 @@ class AppString {
   static const String oK = 'Tamam';
   static const String goFavorites = 'Favorilere Git';
   static const String topRatedTvShows = 'İzleyenlerin En Sevdiği Diziler';
+  static const String notFindMovies = 'Film Bulunamadı';
+  static const String overview = 'Özet';
+  static const String cast = 'Oyuncular';
+  static const String similarMovies = 'Benzer Filmler';
+  static const String recommendedMovies = 'Önerilen Filmler';
+  static const String minuteMovie = 'Dakika';
+  static const String movies = 'Filmler';
+  static const String tvShows = 'Diziler';
+  static const String noFavoriteMovies = 'Favorilere Film eklenmemiş';
+  static const String noFavoriteTvShows = 'Favorilere Dizi eklenmemiş';
+  static const String searchHint = 'Arama yapabilirsiniz ';
+  static const String noResultsFound = 'Sonuç bulunamadı';
+  static const String search = 'Arama';
 }
