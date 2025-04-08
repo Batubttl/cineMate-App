@@ -35,7 +35,7 @@ class MovieCard extends StatelessWidget {
           vertical: 8,
         ),
         decoration: BoxDecoration(
-          color: Colors.black87,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -63,11 +63,11 @@ class MovieCard extends StatelessWidget {
                       fit: isCarouselView ? BoxFit.cover : BoxFit.fitHeight,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
-                          color: Colors.grey[850],
+                          color: AppColors.surface,
                           child: const Center(
                             child: Icon(
                               Icons.error_outline,
-                              color: Colors.white54,
+                              color: AppColors.textSecondary,
                               size: 32,
                             ),
                           ),
@@ -76,7 +76,7 @@ class MovieCard extends StatelessWidget {
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return Container(
-                          color: Colors.grey[850],
+                          color: AppColors.surface,
                           child: const Center(
                             child: CircularProgressIndicator(),
                           ),
@@ -93,8 +93,8 @@ class MovieCard extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          Colors.black.withOpacity(0.4),
-                          Colors.black.withOpacity(0.8),
+                          AppColors.background.withOpacity(0.4),
+                          AppColors.background.withOpacity(0.8),
                         ],
                         stops: const [0.6, 0.8, 1.0],
                       ),
@@ -113,7 +113,7 @@ class MovieCard extends StatelessWidget {
                           style: AppTextStyles.movieTitle.copyWith(
                             fontSize: isCarouselView ? 16 : 14,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                            color: AppColors.textPrimary,
                             letterSpacing: 0.3,
                             height: 1.2,
                           ),
@@ -130,13 +130,14 @@ class MovieCard extends StatelessWidget {
                                   vertical: 2,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.white24,
+                                  color:
+                                      AppColors.textSecondary.withOpacity(0.2),
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Text(
                                   movie.releaseDate!.split('-')[0],
                                   style: AppTextStyles.bodySmall.copyWith(
-                                    color: Colors.white,
+                                    color: AppColors.textPrimary,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -156,7 +157,7 @@ class MovieCard extends StatelessWidget {
                                     movie.voteAverage?.toStringAsFixed(1) ??
                                         '0.0',
                                     style: AppTextStyles.bodySmall.copyWith(
-                                      color: Colors.white,
+                                      color: AppColors.textPrimary,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -187,7 +188,9 @@ class MovieCard extends StatelessWidget {
                               isFavorite
                                   ? Icons.favorite
                                   : Icons.favorite_border,
-                              color: isFavorite ? Colors.red : Colors.white,
+                              color: isFavorite
+                                  ? AppColors.error
+                                  : AppColors.textPrimary,
                             ),
                             padding: EdgeInsets.zero,
                             constraints: const BoxConstraints(
