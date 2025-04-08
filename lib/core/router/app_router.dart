@@ -4,7 +4,7 @@ import 'package:cinemate_app/presentation/favorite/view/favorite_page.dart';
 import 'package:cinemate_app/presentation/detail/view/movie_detail_screen.dart';
 import 'package:cinemate_app/presentation/home/view/home_screen.dart';
 import 'package:cinemate_app/presentation/search/view/search_view.dart';
-import 'package:cinemate_app/presentation/watchlist/view/watchlist_page.dart';
+import 'package:cinemate_app/presentation/watchlist/view/watchlist_screen.dart';
 import 'package:cinemate_app/presentation/widget/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -44,7 +44,7 @@ class AppRouter {
           ),
           GoRoute(
             path: RouteConstant.watchlist,
-            builder: (context, state) => const WatchListScreen(),
+            builder: (context, state) => const WatchlistScreen(),
           ),
           GoRoute(
             path: RouteConstant.favorites,
