@@ -1,6 +1,6 @@
 extension ApiPathExtension on String {
   String withMovieId(int movieId) {
-    return '$this/$movieId';
+    return replaceAll('{movie_id}', movieId.toString());
   }
 
   String withAccountId(String accountId) {
