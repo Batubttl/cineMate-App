@@ -1,80 +1,47 @@
-// import 'dart:convert';
+import 'package:cinemate_app/core/enum/media_type.dart';
+import 'package:cinemate_app/data/model/movie_model.dart';
+import 'package:cinemate_app/presentation/watchlist/cubit/watchlist_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// import 'package:cinemate_app/data/model/movie_model.dart';
-// import 'package:cinemate_app/presentation/watchlist/cubit/watchlist_state.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+class WatchlistCubit extends Cubit<WatchlistState> {
+  WatchlistCubit() : super(WatchlistState.initial());
 
-// class WatchlistCubit extends Cubit<WatchlistState> {
-//   final SharedPreferences _prefs;
-//   static const String _movieWatchlistKey = 'movie_watchlist';
-//   static const String _tvWatchlistKey = 'tv_watchlist';
+  Future<void> toggleWatchlist({
+    required MovieResults item,
+    required MediaType mediaType,
+  }) async {
+    try {
+      emit(state.copyWith(isLoading: true));
 
-//   WatchlistCubit(this._prefs) : super(const WatchlistState()) {
-//     loadWatchlist();
-//   }
+      final isInWatchlist = state.watchlist.any((movie) => movie.id == item.id);
 
-//   Future<void> loadWatchlist() async {
-//     emit(state.copyWith(isLoading: true));
-//     try {
-//       final movieWatchlistJson = _prefs.getString(_movieWatchlistKey);
-//       final tvWatchlistJson = _prefs.getString(_tvWatchlistKey);
+      if (isInWatchlist) {
+        // Remove from watchlist
+        final updatedWatchlist =
+            state.watchlist.where((movie) => movie.id != item.id).toList();
 
-//       final movieWatchlist = movieWatchlistJson != null
-//           ? (json.decode(movieWatchlistJson) as List)
-//               .map((item) => MovieResults.fromJson(item))
-//               .toList()
-//           : [];
-//       final tvWatchlist = tvWatchlistJson != null
-//           ? (json.decode(tvWatchlistJson) as List)
-//               .map((item) => MovieResults.fromJson(item))
-//               .toList()
-//           : [];
+        emit(state.copyWith(
+          watchlist: updatedWatchlist,
+          isLoading: false,
+        ));
+      } else {
+        // Add to watchlist
+        final updatedWatchlist = [...state.watchlist, item];
 
-//       emit(state.copyWith(
-//         movieWatchlist: movieWatchlist,
-//         tvWatchlist: tvWatchlist,
-//         isLoading: false,
-//       ),);
-//     } catch (e) {
-//       emit(state.copyWith(
-//         isLoading: false,
-//         errorMessage: e.toString(),
-//       ),);
-//     }
-//   }
+        emit(state.copyWith(
+          watchlist: updatedWatchlist,
+          isLoading: false,
+        ));
+      }
+    } catch (e) {
+      emit(state.copyWith(
+        errorMessage: e.toString(),
+        isLoading: false,
+      ));
+    }
+  }
 
-//   Future<void> toggleWatchlist({
-//     required MovieResults item,
-//     required String mediaType,
-//   }) async {
-//     try {
-//       if (mediaType == 'movie') {
-//         final isInWatchlist = state.movieWatchlist?.any(
-//               (watchlist) => watchlist.id == item.id,
-//             ) ??
-//             false;
-
-//         if (isInWatchlist) {
-//           final updatedWatchlist = state.movieWatchlist
-//               ?.where((watchlist) => watchlist.id != item.id)
-//               .toList();
-//           await _prefs.setString(
-//             _movieWatchlistKey,
-//             json.encode(updatedWatchlist?.map((e) => e.toJson()).toList()),
-//           );
-//           emit(state.copyWith(movieWatchlist: updatedWatchlist));
-//         } else {
-//           final updatedWatchlist = [...?state.movieWatchlist, item];
-//           await _prefs.setString(
-//             _movieWatchlistKey,
-//             json.encode(updatedWatchlist.map((e) => e.toJson()).toList()),
-//           );
-//           emit(state.copyWith(movieWatchlist: updatedWatchlist));
-//         }
-//       } else {}
-//     } catch (e) {
-//       emit(state.copyWith(errorMessage: e.toString()));
-//     }
-//   }
-// }
+  bool isInWatchlist(int movieId) {
+    return state.watchlist.any((movie) => movie.id == movieId);
+  }
+}

@@ -1,8 +1,7 @@
-// bottom_nav_bar.dart
 import 'package:cinemate_app/core/constant/app_constant.dart';
 import 'package:cinemate_app/core/theme/app_colors.dart';
-import 'package:cinemate_app/presentation/cubit/navigation/navigation_cubit.dart';
-import 'package:cinemate_app/presentation/cubit/navigation/navigation_state.dart';
+import 'package:cinemate_app/init/navigation/navigation_cubit.dart';
+import 'package:cinemate_app/init/navigation/navigation_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
