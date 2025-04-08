@@ -1,9 +1,7 @@
 import 'package:cinemate_app/core/constant/api_constant.dart';
 import 'package:cinemate_app/core/constant/app_constant.dart';
 import 'package:cinemate_app/core/extension/api_path_extension.dart';
-import 'package:cinemate_app/data/model/favorite_model.dart';
 import 'package:cinemate_app/data/model/genre_model.dart';
-import 'package:cinemate_app/data/model/movie_detail_model.dart';
 import 'package:cinemate_app/data/model/movie_model.dart';
 import 'package:dio/dio.dart';
 
@@ -60,22 +58,6 @@ class MovieService {
     }
   }
 
-  // Movie Detail
-  Future<MovieDetail> getMovieDetail(int movieId) async {
-    try {
-      final response = await _dio.get(
-        ApiConstant.movieDetailPath.withMovieId(movieId),
-        queryParameters: {
-          'language': 'tr-TR',
-          'append_to_response': 'videos,credits,similar,recommendations',
-        },
-      );
-      return MovieDetail.fromJson(response.data);
-    } catch (e) {
-      throw Exception('${AppString.errorMovieDetail}: $e');
-    }
-  }
-
   // Genres
   Future<List<GenreModel>> getGenres() async {
     try {
@@ -110,8 +92,7 @@ class MovieService {
     }
   }
 
-  // Search Movies
-  Future<Movie> searchMovies(String query, {int page = 1}) async {
+  Future<List<MovieResults>> searchMovies(String query, {int page = 1}) async {
     try {
       final response = await _dio.get(
         ApiConstant.searchMoviePath,
@@ -122,9 +103,15 @@ class MovieService {
           'include_adult': false,
         },
       );
-      return Movie.fromJson(response.data);
+      if (response.statusCode == 200) {
+        final results = (response.data['results'] as List)
+            .map((json) => MovieResults.fromJson(json))
+            .toList();
+        return results;
+      }
+      throw Exception('Film arama başarısız oldu');
     } catch (e) {
-      throw Exception('${AppString.errorSearch}: $e');
+      throw Exception('Film arama sırasında bir hata oluştu: $e');
     }
   }
 }
