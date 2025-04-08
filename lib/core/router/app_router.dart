@@ -1,10 +1,10 @@
 import 'package:cinemate_app/core/constant/route_constant.dart';
-import 'package:cinemate_app/presentation/cubit/navigation/navigation_cubit.dart';
-import 'package:cinemate_app/presentation/pages/favorite_page.dart';
-import 'package:cinemate_app/presentation/pages/home_page.dart';
-import 'package:cinemate_app/presentation/pages/movie_detail_page.dart';
-import 'package:cinemate_app/presentation/pages/search_page.dart';
-import 'package:cinemate_app/presentation/pages/watchlist_page.dart';
+import 'package:cinemate_app/init/navigation/navigation_cubit.dart';
+import 'package:cinemate_app/presentation/favorite/view/favorite_page.dart';
+import 'package:cinemate_app/presentation/detail/view/movie_detail_screen.dart';
+import 'package:cinemate_app/presentation/home/view/home_screen.dart';
+import 'package:cinemate_app/presentation/search/view/search_view.dart';
+import 'package:cinemate_app/presentation/watchlist/view/watchlist_page.dart';
 import 'package:cinemate_app/presentation/widget/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,7 +32,7 @@ class AppRouter {
               GoRoute(
                 path: RouteConstant.movieDetail,
                 builder: (context, state) {
-                  final movieId = int.parse(state.pathParameters['id']!);
+                  final movieId = int.parse(state.pathParameters['id'] ?? '0');
                   return MovieDetailScreen(movieId: movieId);
                 },
               ),
